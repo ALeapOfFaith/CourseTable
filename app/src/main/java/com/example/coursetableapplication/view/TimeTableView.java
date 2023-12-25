@@ -49,6 +49,7 @@ public class TimeTableView extends LinearLayout {
     private int numberWidth = 20;
     private Context mContext;
     private List<Course> courseList;
+    private static int courseIdList[] = new int[43];
     private Map<String, Integer> colorMap = new HashMap<>();
     private Map<Integer, List<Course>> courseMap = new HashMap<>();
     //当前是第weekNum周
@@ -163,7 +164,6 @@ public class TimeTableView extends LinearLayout {
 
         //上一周箭头
         ImageView mLeftArrow = new ImageView(mContext);
-        mLeftArrow = new ImageView(mContext);
         mLeftArrow.setImageResource(R.drawable.left_arrow);
 
         RelativeLayout.LayoutParams layoutParams_leftArrow = new RelativeLayout.LayoutParams(dip2px(30), dip2px(30));
@@ -277,13 +277,14 @@ public class TimeTableView extends LinearLayout {
         for(Course c: courseList){
             if (c.getStartWeek() > weekNum || c.getEndWeek() < weekNum) continue;
 
+            courseIdList[(c.getDay() - 1) * 6 + c.getSection()] = c.getId();
             TextView textView = findViewById( (c.getDay() - 1) * 6 + c.getSection() );
             textView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, cellHeight + tableLineWidth));
             textView.setTextSize(courseSize);
             textView.setTextColor(Color.WHITE);
             textView.setGravity(Gravity.CENTER);
             textView.setBackgroundColor(getColor(colorMap, c.getCourseName()));
-            textView.setText(String.format("%s\n%s\n%d~%d周\n%s\n%d", c.getCourseName(), c.getTeacherName(), c.getStartWeek(), c.getEndWeek(), c.getClassroom(), c.getId()));
+            textView.setText(String.format("%s\n%s\n%d~%d周\n%s", c.getCourseName(), c.getTeacherName(), c.getStartWeek(), c.getEndWeek(), c.getClassroom()));
 
             textView.setOnLongClickListener(view -> {
                 Intent intent = new Intent(mContext, EditCourseActivity.class);
@@ -400,5 +401,13 @@ public class TimeTableView extends LinearLayout {
 
     public void setWeekNum(int weekNum) {
         this.weekNum = weekNum;
+    }
+
+    public static int[] getCourseIdList() {
+        return courseIdList;
+    }
+
+    public static void setCourseIdList(int[] courseIdList) {
+        TimeTableView.courseIdList = courseIdList;
     }
 }

@@ -135,7 +135,7 @@ public class CourseUtils {
 
     public static String[] parseCourseInfo(String info, int cellId){
         String[] str = info.split("\n");
-        String[] res = new String[8];
+        String[] res = new String[7];
 
         res[0] = str[0];
         res[1] = str[1];
@@ -156,7 +156,7 @@ public class CourseUtils {
         res[4] = String.valueOf(parseDay(cellId));
         res[5] = String.valueOf(parseTime(cellId));
         res[6] = str[3];
-        res[7] = String.valueOf(str[4]);
+
         return res;
     }
 

@@ -95,7 +95,8 @@ public class MainActivity1 extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity1.this, MainActivity2.class);
-                startActivity(intent);
+//                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 

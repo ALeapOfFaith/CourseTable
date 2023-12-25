@@ -13,6 +13,7 @@ import com.example.coursetableapplication.R;
 import com.example.coursetableapplication.entity.Course;
 import com.example.coursetableapplication.helper.MySQLiteHelper;
 import com.example.coursetableapplication.util.CourseUtils;
+import com.example.coursetableapplication.view.TimeTableView;
 
 public class EditCourseActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class EditCourseActivity extends AppCompatActivity {
         editText = findViewById(R.id.input_p2_editCourse_classroom);
         editText.setText(info[6]);
 
-        int courseId = Integer.parseInt(info[7]);
+        int courseId = TimeTableView.getCourseIdList()[cellId];
 
         btnYes.setOnClickListener(view -> {
             Course course = new Course();
